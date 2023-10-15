@@ -1,0 +1,74 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/controller/data_controller.gd" type="Script" id=1]
+[ext_resource path="res://scripts/controller/controller.gd" type="Script" id=2]
+[ext_resource path="res://scripts/controller/input_controller.gd" type="Script" id=3]
+[ext_resource path="res://scripts/controller/mouse_controller.gd" type="Script" id=4]
+[ext_resource path="res://scripts/controller/event_controller.gd" type="Script" id=5]
+[ext_resource path="res://scripts/controller/generator/individual_generator.gd" type="Script" id=6]
+[ext_resource path="res://scripts/controller/manager/structure_manager.gd" type="Script" id=7]
+[ext_resource path="res://scripts/controller/time_controller.gd" type="Script" id=8]
+[ext_resource path="res://scripts/controller/manager/population_manager.gd" type="Script" id=9]
+[ext_resource path="res://scripts/controller/generator/tribe_generator.gd" type="Script" id=10]
+[ext_resource path="res://scripts/controller/tool_controller.gd" type="Script" id=11]
+[ext_resource path="res://scripts/controller/world_controller.gd" type="Script" id=12]
+[ext_resource path="res://scripts/controller/turn_controller.gd" type="Script" id=13]
+[ext_resource path="res://scripts/controller/generator/world_generator.gd" type="Script" id=14]
+
+[node name="Controller" type="Node"]
+script = ExtResource( 2 )
+
+[node name="DataController" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="EventController" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="IndividualGenerator" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="InputController" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+
+[node name="MouseController" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="PopulationController" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="StructureController" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="TimeController" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="ToolController" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 11 )
+
+[node name="TribeGenerator" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="TurnController" type="Node" parent="."]
+script = ExtResource( 13 )
+
+[node name="WorldController" type="Node" parent="."]
+script = ExtResource( 12 )
+
+[node name="WorldGenerator" type="Node2D" parent="."]
+script = ExtResource( 14 )
+
+[node name="WorldGenerationEntry" type="Panel" parent="WorldGenerator"]
+visible = false
+margin_right = 250.0
+margin_bottom = 400.0
+
+[connection signal="mouse_pressed" from="MouseController" to="ToolController" method="_on_mouse_pressed"]
+[connection signal="mouse_released" from="MouseController" to="ToolController" method="_on_mouse_released"]
+[connection signal="mouse_right_click" from="MouseController" to="ToolController" method="_on_mouse_right_click"]
+[connection signal="mouse_right_released" from="MouseController" to="ToolController" method="_on_mouse_right_released"]
+[connection signal="tick" from="TimeController" to="TurnController" method="_on_tick"]
+[connection signal="feature_placed" from="ToolController" to="StructureController" method="_on_feature_placed"]
+[connection signal="next_turn" from="TurnController" to="WorldController" method="_on_turn"]

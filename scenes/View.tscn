@@ -1,0 +1,1363 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://scripts/view/gui/event_log.gd" type="Script" id=1]
+[ext_resource path="res://scripts/view/gui/gui.gd" type="Script" id=2]
+[ext_resource path="res://scripts/view/gui/clock.gd" type="Script" id=3]
+[ext_resource path="res://scripts/view/gui/debug.gd" type="Script" id=4]
+[ext_resource path="res://scripts/view/gui/databar.gd" type="Script" id=5]
+[ext_resource path="res://scripts/view/gui/toolkit.gd" type="Script" id=6]
+[ext_resource path="res://scripts/view/view.gd" type="Script" id=7]
+[ext_resource path="res://scripts/view/gui/window.gd" type="Script" id=8]
+[ext_resource path="res://scripts/controller/manager/window_manager.gd" type="Script" id=9]
+[ext_resource path="res://scripts/view/gui/world_generation.gd" type="Script" id=10]
+[ext_resource path="res://assets/textures/icons/icon_divinity.png" type="Texture" id=11]
+[ext_resource path="res://assets/textures/icons/icon_toolkit.png" type="Texture" id=12]
+[ext_resource path="res://assets/textures/icons/icon_circle.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/icons/icon_build_hut.png" type="Texture" id=14]
+[ext_resource path="res://assets/textures/icons/icon_speed_overlay.png" type="Texture" id=15]
+[ext_resource path="res://assets/textures/icons/icon_toggle_pause.png" type="Texture" id=16]
+[ext_resource path="res://assets/textures/icons/icon_overlay_red.png" type="Texture" id=17]
+[ext_resource path="res://assets/textures/icons/icon_build_farm.png" type="Texture" id=18]
+[ext_resource path="res://assets/textures/icons/icon_society.png" type="Texture" id=19]
+[ext_resource path="res://assets/textures/icons/icon_identity.png" type="Texture" id=20]
+[ext_resource path="res://assets/textures/icons/icon_overlay_green.png" type="Texture" id=21]
+[ext_resource path="res://assets/textures/icons/icon_add.png" type="Texture" id=22]
+[ext_resource path="res://assets/textures/icons/icon_politics.png" type="Texture" id=23]
+[ext_resource path="res://assets/textures/icons/icon_control_databar.png" type="Texture" id=24]
+[ext_resource path="res://assets/textures/icons/icon_resize.png" type="Texture" id=25]
+[ext_resource path="res://assets/textures/icons/icon_settings.png" type="Texture" id=26]
+[ext_resource path="res://assets/textures/icons/icon_pin.png" type="Texture" id=27]
+[ext_resource path="res://assets/textures/icons/icon_economy.png" type="Texture" id=28]
+[ext_resource path="res://assets/textures/icons/icon_build_lodge.png" type="Texture" id=29]
+[ext_resource path="res://assets/textures/icons/icon_close.png" type="Texture" id=30]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="ImageTexture" id=4]
+flags = 3
+flags = 3
+size = Vector2( 1910, 1070 )
+
+[node name="View" type="CanvasLayer"]
+script = ExtResource( 7 )
+
+[node name="GUI" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Toolbar" type="Panel" parent="GUI"]
+margin_right = 1920.0
+margin_bottom = 42.0
+
+[node name="Databar" type="Panel" parent="GUI/Toolbar"]
+margin_right = 1350.0
+margin_bottom = 42.0
+script = ExtResource( 5 )
+
+[node name="Controls" type="Sprite" parent="GUI/Toolbar/Databar"]
+position = Vector2( 12, 21 )
+texture = ExtResource( 24 )
+
+[node name="Settings" type="TextureButton" parent="GUI/Toolbar/Databar/Controls"]
+margin_left = -9.0
+margin_top = -19.0
+margin_right = 9.0
+margin_bottom = -1.0
+texture_normal = ExtResource( 26 )
+expand = true
+
+[node name="Add" type="TextureButton" parent="GUI/Toolbar/Databar/Controls"]
+margin_left = -9.0
+margin_top = 1.0
+margin_right = 9.0
+margin_bottom = 19.0
+texture_normal = ExtResource( 22 )
+expand = true
+
+[node name="Tabs" type="Control" parent="GUI/Toolbar/Databar"]
+margin_left = 24.0
+margin_right = 1348.0
+margin_bottom = 42.0
+
+[node name="Toolkit" type="Panel" parent="GUI/Toolbar"]
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_left = 1356.0
+margin_right = 1478.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 140, 38 )
+script = ExtResource( 6 )
+
+[node name="Examine" type="Button" parent="GUI/Toolbar/Toolkit"]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 39.0
+margin_bottom = 38.0
+
+[node name="IconExamine" type="Sprite" parent="GUI/Toolbar/Toolkit/Examine"]
+position = Vector2( 17, 17 )
+scale = Vector2( 0.53125, 0.53125 )
+texture = ExtResource( 13 )
+
+[node name="Command" type="Button" parent="GUI/Toolbar/Toolkit"]
+margin_left = 44.0
+margin_top = 4.0
+margin_right = 78.0
+margin_bottom = 38.0
+
+[node name="IconCommand" type="Sprite" parent="GUI/Toolbar/Toolkit/Command"]
+position = Vector2( 17, 17 )
+scale = Vector2( 0.53125, 0.53125 )
+texture = ExtResource( 11 )
+
+[node name="Build" type="Button" parent="GUI/Toolbar/Toolkit"]
+margin_left = 83.0
+margin_top = 4.0
+margin_right = 117.0
+margin_bottom = 38.0
+
+[node name="IconBuild" type="Sprite" parent="GUI/Toolbar/Toolkit/Build"]
+position = Vector2( 17, 17 )
+scale = Vector2( 0.531249, 0.531249 )
+texture = ExtResource( 12 )
+
+[node name="ItemDisplay" type="Panel" parent="GUI/Toolbar/Toolkit"]
+visible = false
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_left = -19.0
+margin_top = 45.0
+margin_right = 142.0
+margin_bottom = 166.0
+rect_pivot_offset = Vector2( 140, 38 )
+
+[node name="ExamineItem" type="Control" parent="GUI/Toolbar/Toolkit/ItemDisplay"]
+visible = false
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_right = 161.0
+margin_bottom = 121.0
+rect_pivot_offset = Vector2( 140, 38 )
+
+[node name="Item" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/ExamineItem"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 159.0
+margin_bottom = 119.0
+
+[node name="CommandItems" type="Control" parent="GUI/Toolbar/Toolkit/ItemDisplay"]
+visible = false
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_right = 161.0
+margin_bottom = 121.0
+rect_pivot_offset = Vector2( 140, 38 )
+
+[node name="Item" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 39.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item2" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 44.0
+margin_top = 4.0
+margin_right = 78.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item2"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item3" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 83.0
+margin_top = 4.0
+margin_right = 117.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item3"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item4" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 122.0
+margin_top = 4.0
+margin_right = 156.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item4"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item5" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 5.0
+margin_top = 43.0
+margin_right = 39.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item5"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item6" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 44.0
+margin_top = 43.0
+margin_right = 78.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item6"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item7" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 83.0
+margin_top = 43.0
+margin_right = 117.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item7"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item8" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 122.0
+margin_top = 43.0
+margin_right = 156.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item8"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item9" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 5.0
+margin_top = 82.0
+margin_right = 39.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item9"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item10" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 44.0
+margin_top = 82.0
+margin_right = 78.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item10"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item11" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 83.0
+margin_top = 82.0
+margin_right = 117.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item11"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item12" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems"]
+margin_left = 122.0
+margin_top = 82.0
+margin_right = 156.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/CommandItems/Item12"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="BuildItems" type="Control" parent="GUI/Toolbar/Toolkit/ItemDisplay"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.862745 )
+margin_right = 161.0
+margin_bottom = 121.0
+rect_pivot_offset = Vector2( 140, 38 )
+
+[node name="Item" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 5.0
+margin_top = 4.0
+margin_right = 39.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item"]
+position = Vector2( 17, 17 )
+texture = ExtResource( 14 )
+
+[node name="Item2" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 44.0
+margin_top = 4.0
+margin_right = 78.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item2"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 29 )
+
+[node name="Item3" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 83.0
+margin_top = 4.0
+margin_right = 117.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item3"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 18 )
+
+[node name="Item4" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 122.0
+margin_top = 4.0
+margin_right = 156.0
+margin_bottom = 38.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item4"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item5" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 5.0
+margin_top = 43.0
+margin_right = 39.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item5"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item6" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 44.0
+margin_top = 43.0
+margin_right = 78.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item6"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item7" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 83.0
+margin_top = 43.0
+margin_right = 117.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item7"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item8" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 122.0
+margin_top = 43.0
+margin_right = 156.0
+margin_bottom = 77.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item8"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item9" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 5.0
+margin_top = 82.0
+margin_right = 39.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item9"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item10" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 44.0
+margin_top = 82.0
+margin_right = 78.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item10"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item11" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 83.0
+margin_top = 82.0
+margin_right = 117.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item11"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="Item12" type="Button" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems"]
+margin_left = 122.0
+margin_top = 82.0
+margin_right = 156.0
+margin_bottom = 116.0
+
+[node name="Icon" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item12"]
+position = Vector2( 17, 17 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 17 )
+
+[node name="ItemOverlay" type="Sprite" parent="GUI/Toolbar/Toolkit/ItemDisplay"]
+visible = false
+scale = Vector2( 1.063, 1.063 )
+texture = ExtResource( 15 )
+
+[node name="ToolOverlay" type="Sprite" parent="GUI/Toolbar/Toolkit"]
+visible = false
+position = Vector2( 22, 21 )
+texture = ExtResource( 15 )
+
+[node name="Clock" type="Panel" parent="GUI/Toolbar"]
+margin_left = 1486.0
+margin_top = 6.0
+margin_right = 1915.0
+margin_bottom = 42.0
+script = ExtResource( 3 )
+
+[node name="DisplayTime" type="Panel" parent="GUI/Toolbar/Clock"]
+margin_left = 200.0
+margin_top = 8.0
+margin_right = 383.0
+margin_bottom = 22.0
+
+[node name="Labels" type="Control" parent="GUI/Toolbar/Clock/DisplayTime"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Week" type="Label" parent="GUI/Toolbar/Clock/DisplayTime/Labels"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "week"
+
+[node name="Season" type="Label" parent="GUI/Toolbar/Clock/DisplayTime/Labels"]
+margin_left = 60.0
+margin_right = 75.0
+margin_bottom = 14.0
+text = "of"
+
+[node name="Year" type="Label" parent="GUI/Toolbar/Clock/DisplayTime/Labels"]
+margin_left = 140.0
+margin_right = 170.0
+margin_bottom = 14.0
+text = "year"
+
+[node name="Texts" type="Control" parent="GUI/Toolbar/Clock/DisplayTime"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Week" type="Label" parent="GUI/Toolbar/Clock/DisplayTime/Texts"]
+margin_left = 40.0
+margin_right = 55.0
+margin_bottom = 14.0
+
+[node name="Season" type="Label" parent="GUI/Toolbar/Clock/DisplayTime/Texts"]
+margin_left = 77.0
+margin_right = 132.0
+margin_bottom = 14.0
+
+[node name="Year" type="Label" parent="GUI/Toolbar/Clock/DisplayTime/Texts"]
+margin_left = 175.0
+margin_right = 215.0
+margin_bottom = 14.0
+
+[node name="Controls" type="Control" parent="GUI/Toolbar/Clock"]
+margin_top = -3.0
+margin_right = 171.0
+margin_bottom = 27.0
+
+[node name="TogglePause" type="TextureButton" parent="GUI/Toolbar/Clock/Controls"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 34.0
+margin_bottom = 34.0
+toggle_mode = true
+texture_normal = ExtResource( 16 )
+
+[node name="Speed1" type="Button" parent="GUI/Toolbar/Clock/Controls"]
+margin_left = 38.0
+margin_top = 2.0
+margin_right = 70.0
+margin_bottom = 34.0
+text = "1"
+
+[node name="Speed2" type="Button" parent="GUI/Toolbar/Clock/Controls"]
+margin_left = 74.0
+margin_top = 2.0
+margin_right = 106.0
+margin_bottom = 34.0
+text = "2"
+
+[node name="Speed3" type="Button" parent="GUI/Toolbar/Clock/Controls"]
+margin_left = 110.0
+margin_top = 2.0
+margin_right = 142.0
+margin_bottom = 34.0
+text = "3"
+
+[node name="Speed4" type="Button" parent="GUI/Toolbar/Clock/Controls"]
+margin_left = 146.0
+margin_top = 2.0
+margin_right = 178.0
+margin_bottom = 34.0
+text = "4"
+
+[node name="OverlayTurning" type="Sprite" parent="GUI/Toolbar/Clock/Controls"]
+visible = false
+position = Vector2( 18, 18 )
+texture = ExtResource( 21 )
+
+[node name="OverlayPaused" type="Sprite" parent="GUI/Toolbar/Clock/Controls"]
+position = Vector2( 18, 18 )
+texture = ExtResource( 17 )
+
+[node name="OverlaySpeed" type="Sprite" parent="GUI/Toolbar/Clock/Controls"]
+modulate = Color( 1, 1, 1, 0.611765 )
+position = Vector2( 54, 18 )
+texture = ExtResource( 15 )
+
+[node name="EventLog" type="Panel" parent="GUI"]
+modulate = Color( 1, 1, 1, 0.705882 )
+margin_left = 1660.0
+margin_top = 50.0
+margin_right = 1910.0
+margin_bottom = 1070.0
+script = ExtResource( 1 )
+
+[node name="Header" type="Panel" parent="GUI/EventLog"]
+self_modulate = Color( 0.054902, 0, 1, 1 )
+margin_right = 250.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="GUI/EventLog/Header"]
+margin_right = 250.0
+margin_bottom = 40.0
+text = "Event Log"
+align = 1
+valign = 1
+
+[node name="Body" type="Panel" parent="GUI/EventLog"]
+self_modulate = Color( 1, 0, 0, 1 )
+margin_top = 40.0
+margin_right = 250.0
+margin_bottom = 1020.0
+
+[node name="Debug" type="Panel" parent="GUI"]
+modulate = Color( 1, 1, 1, 0.980392 )
+margin_left = 15.0
+margin_top = 855.0
+margin_right = 235.0
+margin_bottom = 1068.0
+script = ExtResource( 4 )
+
+[node name="Header" type="Label" parent="GUI/Debug"]
+margin_left = 10.0
+margin_top = 9.0
+margin_right = 81.0
+margin_bottom = 23.0
+custom_styles/normal = SubResource( 3 )
+text = "POSITIONS"
+
+[node name="Data" type="Control" parent="GUI/Debug"]
+margin_top = 32.0
+margin_right = 200.0
+margin_bottom = 213.0
+
+[node name="Mouse" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 191.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/Mouse"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "MOUSE"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/Mouse"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "(0,0)"
+
+[node name="World" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 30.0
+margin_right = 191.0
+margin_bottom = 44.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/World"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "WORLD"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/World"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "(0,0)"
+
+[node name="Cell" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 191.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/Cell"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "CELL"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/Cell"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "(0,0)"
+
+[node name="HexPos" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 70.0
+margin_right = 191.0
+margin_bottom = 84.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/HexPos"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "HEX_POS"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/HexPos"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "(0,0)"
+
+[node name="HexID" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 191.0
+margin_bottom = 104.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/HexID"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "HEX_ID"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/HexID"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "0"
+
+[node name="Biome" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 110.0
+margin_right = 191.0
+margin_bottom = 124.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/Biome"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "BIOME"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/Biome"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "grassland"
+
+[node name="LocalID" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 130.0
+margin_right = 191.0
+margin_bottom = 144.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/LocalID"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "LOCAL_ID"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/LocalID"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "0"
+
+[node name="Feature" type="Panel" parent="GUI/Debug/Data"]
+margin_left = 10.0
+margin_top = 150.0
+margin_right = 191.0
+margin_bottom = 164.0
+
+[node name="Label" type="Label" parent="GUI/Debug/Data/Feature"]
+margin_right = 57.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "FEATURE"
+
+[node name="Text" type="Label" parent="GUI/Debug/Data/Feature"]
+margin_left = 90.0
+margin_right = 180.0
+margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
+text = "grass"
+
+[node name="WindowManager" type="Control" parent="GUI"]
+script = ExtResource( 9 )
+
+[node name="Windows" type="Control" parent="GUI/WindowManager"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Identity" type="Panel" parent="GUI/WindowManager/Windows"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 61.0
+margin_top = 45.0
+margin_right = 221.0
+margin_bottom = 205.0
+rect_min_size = Vector2( 100, 100 )
+script = ExtResource( 8 )
+
+[node name="Toolbar" type="Panel" parent="GUI/WindowManager/Windows/Identity"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ButtonDrag" type="TextureButton" parent="GUI/WindowManager/Windows/Identity/Toolbar"]
+anchor_right = 1.0
+margin_bottom = 40.0
+
+[node name="ButtonClose" type="TextureButton" parent="GUI/WindowManager/Windows/Identity/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -20.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 30 )
+
+[node name="ButtonPin" type="TextureButton" parent="GUI/WindowManager/Windows/Identity/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -39.0
+margin_top = 4.0
+margin_right = -24.0
+margin_bottom = 19.0
+rect_scale = Vector2( 1.067, 1.067 )
+texture_normal = ExtResource( 27 )
+
+[node name="Key" type="Label" parent="GUI/WindowManager/Windows/Identity/Toolbar"]
+margin_right = 100.0
+margin_bottom = 40.0
+text = "Identity"
+align = 1
+valign = 1
+
+[node name="Data" type="Control" parent="GUI/WindowManager/Windows/Identity"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+margin_top = 40.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Element" type="Control" parent="GUI/WindowManager/Windows/Identity/Data"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Identity/Data/Element"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Tiles"
+
+[node name="Element2" type="Control" parent="GUI/WindowManager/Windows/Identity/Data"]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 190.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Identity/Data/Element2"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Structures"
+
+[node name="Element3" type="Control" parent="GUI/WindowManager/Windows/Identity/Data"]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 190.0
+margin_bottom = 120.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Identity/Data/Element3"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Individuals"
+
+[node name="ToolButton" type="ToolButton" parent="GUI/WindowManager/Windows/Identity/Data/Element3"]
+margin_right = 180.0
+margin_bottom = 30.0
+
+[node name="ButtonResize" type="TextureButton" parent="GUI/WindowManager/Windows/Identity"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+texture_normal = ExtResource( 25 )
+
+[node name="Society" type="Panel" parent="GUI/WindowManager/Windows"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 266.0
+margin_top = 45.0
+margin_right = 426.0
+margin_bottom = 205.0
+rect_min_size = Vector2( 100, 100 )
+script = ExtResource( 8 )
+
+[node name="Toolbar" type="Panel" parent="GUI/WindowManager/Windows/Society"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ButtonDrag" type="TextureButton" parent="GUI/WindowManager/Windows/Society/Toolbar"]
+anchor_right = 1.0
+margin_bottom = 40.0
+
+[node name="ButtonClose" type="TextureButton" parent="GUI/WindowManager/Windows/Society/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -20.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 30 )
+
+[node name="ButtonPin" type="TextureButton" parent="GUI/WindowManager/Windows/Society/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -39.0
+margin_top = 4.0
+margin_right = -24.0
+margin_bottom = 19.0
+rect_scale = Vector2( 1.067, 1.067 )
+texture_normal = ExtResource( 27 )
+
+[node name="Key" type="Label" parent="GUI/WindowManager/Windows/Society/Toolbar"]
+margin_right = 100.0
+margin_bottom = 40.0
+text = "Society"
+align = 1
+valign = 1
+
+[node name="Data" type="Control" parent="GUI/WindowManager/Windows/Society"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+margin_top = 40.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Element" type="Control" parent="GUI/WindowManager/Windows/Society/Data"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Society/Data/Element"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Communities"
+
+[node name="Element2" type="Control" parent="GUI/WindowManager/Windows/Society/Data"]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 190.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Society/Data/Element2"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Families"
+
+[node name="Element3" type="Control" parent="GUI/WindowManager/Windows/Society/Data"]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 190.0
+margin_bottom = 120.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Society/Data/Element3"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Clans"
+
+[node name="ButtonResize" type="TextureButton" parent="GUI/WindowManager/Windows/Society"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+texture_normal = ExtResource( 25 )
+
+[node name="Economy" type="Panel" parent="GUI/WindowManager/Windows"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 471.0
+margin_top = 45.0
+margin_right = 631.0
+margin_bottom = 205.0
+rect_min_size = Vector2( 100, 100 )
+script = ExtResource( 8 )
+
+[node name="Toolbar" type="Panel" parent="GUI/WindowManager/Windows/Economy"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ButtonDrag" type="TextureButton" parent="GUI/WindowManager/Windows/Economy/Toolbar"]
+anchor_right = 1.0
+margin_bottom = 40.0
+
+[node name="ButtonClose" type="TextureButton" parent="GUI/WindowManager/Windows/Economy/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -20.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 30 )
+
+[node name="ButtonPin" type="TextureButton" parent="GUI/WindowManager/Windows/Economy/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -39.0
+margin_top = 4.0
+margin_right = -24.0
+margin_bottom = 19.0
+rect_scale = Vector2( 1.067, 1.067 )
+texture_normal = ExtResource( 27 )
+
+[node name="Key" type="Label" parent="GUI/WindowManager/Windows/Economy/Toolbar"]
+margin_right = 100.0
+margin_bottom = 40.0
+text = "Economy"
+align = 1
+valign = 1
+
+[node name="Data" type="Control" parent="GUI/WindowManager/Windows/Economy"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+margin_top = 40.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Element" type="Control" parent="GUI/WindowManager/Windows/Economy/Data"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Economy/Data/Element"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Households"
+
+[node name="Element2" type="Control" parent="GUI/WindowManager/Windows/Economy/Data"]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 190.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Economy/Data/Element2"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Businesses"
+
+[node name="Element3" type="Control" parent="GUI/WindowManager/Windows/Economy/Data"]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 190.0
+margin_bottom = 120.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Economy/Data/Element3"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Resources"
+
+[node name="ButtonResize" type="TextureButton" parent="GUI/WindowManager/Windows/Economy"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+texture_normal = ExtResource( 25 )
+
+[node name="Politics" type="Panel" parent="GUI/WindowManager/Windows"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 676.0
+margin_top = 45.0
+margin_right = 836.0
+margin_bottom = 205.0
+rect_min_size = Vector2( 100, 100 )
+script = ExtResource( 8 )
+
+[node name="Toolbar" type="Panel" parent="GUI/WindowManager/Windows/Politics"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ButtonDrag" type="TextureButton" parent="GUI/WindowManager/Windows/Politics/Toolbar"]
+anchor_right = 1.0
+margin_left = -10.0
+margin_top = -9.0
+margin_right = -10.0
+margin_bottom = 31.0
+
+[node name="ButtonClose" type="TextureButton" parent="GUI/WindowManager/Windows/Politics/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -20.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 30 )
+
+[node name="ButtonPin" type="TextureButton" parent="GUI/WindowManager/Windows/Politics/Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -39.0
+margin_top = 4.0
+margin_right = -24.0
+margin_bottom = 19.0
+rect_scale = Vector2( 1.067, 1.067 )
+texture_normal = ExtResource( 27 )
+
+[node name="Key" type="Label" parent="GUI/WindowManager/Windows/Politics/Toolbar"]
+margin_right = 100.0
+margin_bottom = 40.0
+text = "Politics"
+align = 1
+valign = 1
+
+[node name="Data" type="Control" parent="GUI/WindowManager/Windows/Politics"]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+margin_top = 40.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Element" type="Control" parent="GUI/WindowManager/Windows/Politics/Data"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Politics/Data/Element"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Government"
+
+[node name="Element2" type="Control" parent="GUI/WindowManager/Windows/Politics/Data"]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 190.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Politics/Data/Element2"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Actors"
+
+[node name="Element3" type="Control" parent="GUI/WindowManager/Windows/Politics/Data"]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 190.0
+margin_bottom = 120.0
+
+[node name="Label" type="Label" parent="GUI/WindowManager/Windows/Politics/Data/Element3"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Factions"
+
+[node name="ButtonResize" type="TextureButton" parent="GUI/WindowManager/Windows/Politics"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -16.0
+texture_normal = ExtResource( 25 )
+
+[node name="WindowToggle" type="Panel" parent="GUI/WindowManager"]
+margin_left = 5.0
+margin_top = 45.0
+margin_right = 55.0
+margin_bottom = 230.0
+
+[node name="ToggleIdentity" type="TextureButton" parent="GUI/WindowManager/WindowToggle"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 45.0
+texture_normal = ExtResource( 20 )
+
+[node name="ToggleSociety" type="TextureButton" parent="GUI/WindowManager/WindowToggle"]
+margin_left = 5.0
+margin_top = 50.0
+margin_right = 45.0
+margin_bottom = 90.0
+texture_normal = ExtResource( 19 )
+
+[node name="ToggleEconomy" type="TextureButton" parent="GUI/WindowManager/WindowToggle"]
+margin_left = 5.0
+margin_top = 95.0
+margin_right = 45.0
+margin_bottom = 135.0
+texture_normal = ExtResource( 28 )
+
+[node name="TogglePolitics" type="TextureButton" parent="GUI/WindowManager/WindowToggle"]
+margin_left = 5.0
+margin_top = 140.0
+margin_right = 45.0
+margin_bottom = 180.0
+texture_normal = ExtResource( 23 )
+
+[node name="GameMenu" type="Control" parent="GUI"]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Background" type="Sprite" parent="GUI/GameMenu"]
+position = Vector2( 960, 540 )
+texture = SubResource( 4 )
+
+[node name="Panel" type="Panel" parent="GUI/GameMenu"]
+margin_left = 785.0
+margin_top = 200.0
+margin_right = 1135.0
+margin_bottom = 760.0
+
+[node name="Button" type="Button" parent="GUI/GameMenu/Panel"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 300.0
+margin_bottom = 110.0
+text = "New"
+
+[node name="Button2" type="Button" parent="GUI/GameMenu/Panel"]
+margin_left = 50.0
+margin_top = 150.0
+margin_right = 300.0
+margin_bottom = 210.0
+text = "Load"
+
+[node name="Button3" type="Button" parent="GUI/GameMenu/Panel"]
+margin_left = 50.0
+margin_top = 250.0
+margin_right = 300.0
+margin_bottom = 310.0
+text = "Settings"
+
+[node name="Button4" type="Button" parent="GUI/GameMenu/Panel"]
+margin_left = 50.0
+margin_top = 350.0
+margin_right = 300.0
+margin_bottom = 410.0
+text = "Credits"
+
+[node name="Button5" type="Button" parent="GUI/GameMenu/Panel"]
+margin_left = 50.0
+margin_top = 450.0
+margin_right = 300.0
+margin_bottom = 510.0
+text = "Exit"
+
+[node name="MainMenu" type="Control" parent="."]
+visible = false
+margin_right = 1920.0
+margin_bottom = 1080.0
+
+[node name="Background" type="Sprite" parent="MainMenu"]
+position = Vector2( 960, 540 )
+texture = SubResource( 4 )
+
+[node name="Panel" type="Panel" parent="MainMenu"]
+margin_left = 785.0
+margin_top = 200.0
+margin_right = 1135.0
+margin_bottom = 760.0
+
+[node name="Button" type="Button" parent="MainMenu/Panel"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 300.0
+margin_bottom = 110.0
+text = "New"
+
+[node name="Button2" type="Button" parent="MainMenu/Panel"]
+margin_left = 50.0
+margin_top = 150.0
+margin_right = 300.0
+margin_bottom = 210.0
+text = "Load"
+
+[node name="Button3" type="Button" parent="MainMenu/Panel"]
+margin_left = 50.0
+margin_top = 250.0
+margin_right = 300.0
+margin_bottom = 310.0
+text = "Settings"
+
+[node name="Button4" type="Button" parent="MainMenu/Panel"]
+margin_left = 50.0
+margin_top = 350.0
+margin_right = 300.0
+margin_bottom = 410.0
+text = "Credits"
+
+[node name="Button5" type="Button" parent="MainMenu/Panel"]
+margin_left = 50.0
+margin_top = 450.0
+margin_right = 300.0
+margin_bottom = 510.0
+text = "Exit"
+
+[node name="WorldGeneration" type="Panel" parent="."]
+visible = false
+margin_left = 700.0
+margin_top = 250.0
+margin_right = 1220.0
+margin_bottom = 830.0
+script = ExtResource( 10 )
+
+[node name="Header" type="Label" parent="WorldGeneration"]
+margin_right = 525.0
+margin_bottom = 90.0
+text = "WORLD GENERATION"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="WorldGeneration"]
+margin_left = 202.0
+margin_top = 520.0
+margin_right = 322.0
+margin_bottom = 560.0
+text = "Generate"
+
+[node name="MapScale" type="Control" parent="WorldGeneration"]
+margin_left = 10.0
+margin_top = 100.0
+margin_right = 510.0
+margin_bottom = 140.0
+
+[node name="Label" type="Label" parent="WorldGeneration/MapScale"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 90.0
+margin_bottom = 30.0
+text = "MAP SCALE:"
+
+[node name="Text" type="TextEdit" parent="WorldGeneration/MapScale"]
+margin_left = 120.0
+margin_top = 7.0
+margin_right = 181.0
+margin_bottom = 27.0
+text = "10"
+
+[node name="TribeSize" type="Control" parent="WorldGeneration"]
+margin_left = 10.0
+margin_top = 150.0
+margin_right = 510.0
+margin_bottom = 190.0
+
+[node name="Label" type="Label" parent="WorldGeneration/TribeSize"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 90.0
+margin_bottom = 30.0
+text = "TRIBE SIZE:"
+
+[node name="Text" type="TextEdit" parent="WorldGeneration/TribeSize"]
+margin_left = 120.0
+margin_top = 6.0
+margin_right = 181.0
+margin_bottom = 26.0
+text = "10"
+
+[connection signal="pressed" from="GUI/Toolbar/Toolkit/Examine" to="GUI/Toolbar/Toolkit" method="select_tool" binds= [ "examine" ]]
+[connection signal="pressed" from="GUI/Toolbar/Toolkit/Command" to="GUI/Toolbar/Toolkit" method="select_tool" binds= [ "command" ]]
+[connection signal="pressed" from="GUI/Toolbar/Toolkit/Build" to="GUI/Toolbar/Toolkit" method="select_tool" binds= [ "build" ]]
+[connection signal="pressed" from="GUI/Toolbar/Toolkit/ItemDisplay/ExamineItem/Item" to="GUI/Toolbar/Toolkit" method="_on_Examine_pressed"]
+[connection signal="pressed" from="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item" to="GUI/Toolbar/Toolkit" method="select_item" binds= [ "hut" ]]
+[connection signal="pressed" from="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item2" to="GUI/Toolbar/Toolkit" method="select_item" binds= [ "lodge" ]]
+[connection signal="pressed" from="GUI/Toolbar/Toolkit/ItemDisplay/BuildItems/Item3" to="GUI/Toolbar/Toolkit" method="select_item" binds= [ "farm" ]]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Identity/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Identity" method="start_drag"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Identity/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Identity" method="stop_drag"]
+[connection signal="pressed" from="GUI/WindowManager/Windows/Identity/Toolbar/ButtonClose" to="GUI/WindowManager/Windows/Identity" method="close"]
+[connection signal="toggled" from="GUI/WindowManager/Windows/Identity/Toolbar/ButtonPin" to="GUI/WindowManager/Windows/Identity" method="pin"]
+[connection signal="pressed" from="GUI/WindowManager/Windows/Identity/Data/Element3/ToolButton" to="GUI/WindowManager" method="_on_individuals_pressed"]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Identity/ButtonResize" to="GUI/WindowManager/Windows/Identity" method="start_resize"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Identity/ButtonResize" to="GUI/WindowManager/Windows/Identity" method="stop_resize"]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Society/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Society" method="start_drag"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Society/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Society" method="stop_drag"]
+[connection signal="pressed" from="GUI/WindowManager/Windows/Society/Toolbar/ButtonClose" to="GUI/WindowManager/Windows/Society" method="close"]
+[connection signal="toggled" from="GUI/WindowManager/Windows/Society/Toolbar/ButtonPin" to="GUI/WindowManager/Windows/Society" method="pin"]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Society/ButtonResize" to="GUI/WindowManager/Windows/Society" method="start_resize"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Society/ButtonResize" to="GUI/WindowManager/Windows/Society" method="stop_resize"]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Economy/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Economy" method="start_drag"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Economy/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Economy" method="stop_drag"]
+[connection signal="pressed" from="GUI/WindowManager/Windows/Economy/Toolbar/ButtonClose" to="GUI/WindowManager/Windows/Economy" method="close"]
+[connection signal="toggled" from="GUI/WindowManager/Windows/Economy/Toolbar/ButtonPin" to="GUI/WindowManager/Windows/Economy" method="pin"]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Economy/ButtonResize" to="GUI/WindowManager/Windows/Economy" method="start_resize"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Economy/ButtonResize" to="GUI/WindowManager/Windows/Economy" method="stop_resize"]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Politics/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Politics" method="start_drag"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Politics/Toolbar/ButtonDrag" to="GUI/WindowManager/Windows/Politics" method="stop_drag"]
+[connection signal="pressed" from="GUI/WindowManager/Windows/Politics/Toolbar/ButtonClose" to="GUI/WindowManager/Windows/Politics" method="close"]
+[connection signal="toggled" from="GUI/WindowManager/Windows/Politics/Toolbar/ButtonPin" to="GUI/WindowManager/Windows/Politics" method="pin"]
+[connection signal="button_down" from="GUI/WindowManager/Windows/Politics/ButtonResize" to="GUI/WindowManager/Windows/Politics" method="start_resize"]
+[connection signal="button_up" from="GUI/WindowManager/Windows/Politics/ButtonResize" to="GUI/WindowManager/Windows/Politics" method="stop_resize"]
+[connection signal="pressed" from="GUI/WindowManager/WindowToggle/ToggleIdentity" to="GUI/WindowManager" method="_toggle_window" binds= [ "identity" ]]
+[connection signal="pressed" from="GUI/WindowManager/WindowToggle/ToggleSociety" to="GUI/WindowManager" method="_toggle_window" binds= [ "society" ]]
+[connection signal="pressed" from="GUI/WindowManager/WindowToggle/ToggleEconomy" to="GUI/WindowManager" method="_toggle_window" binds= [ "economy" ]]
+[connection signal="pressed" from="GUI/WindowManager/WindowToggle/TogglePolitics" to="GUI/WindowManager" method="_toggle_window" binds= [ "politics" ]]
+[connection signal="pressed" from="GUI/GameMenu/Panel/Button" to="WorldGeneration" method="_on_new_world_pressed"]
+[connection signal="pressed" from="MainMenu/Panel/Button" to="WorldGeneration" method="_on_new_world_pressed"]
+[connection signal="pressed" from="WorldGeneration/Button" to="WorldGeneration" method="_on_generate_pressed"]

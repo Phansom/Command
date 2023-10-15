@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/icons/icon_close.png" type="Texture" id=2]
+[ext_resource path="res://scripts/view/gui/window.gd" type="Script" id=3]
+[ext_resource path="res://assets/textures/icons/icon_pin.png" type="Texture" id=4]
+
+[node name="Window" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1619.0
+margin_bottom = -679.0
+rect_min_size = Vector2( 100, 100 )
+script = ExtResource( 3 )
+
+[node name="Toolbar" type="Panel" parent="."]
+self_modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ButtonDrag" type="TextureButton" parent="Toolbar"]
+anchor_right = 1.0
+margin_bottom = 40.0
+
+[node name="ButtonClose" type="TextureButton" parent="Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -20.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = 20.0
+texture_normal = ExtResource( 2 )
+
+[node name="ButtonPin" type="TextureButton" parent="Toolbar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -39.0
+margin_top = 4.0
+margin_right = -24.0
+margin_bottom = 19.0
+rect_scale = Vector2( 1.067, 1.067 )
+texture_normal = ExtResource( 4 )
+
+[node name="Body" type="Panel" parent="."]
+self_modulate = Color( 0.745098, 0.670588, 1, 0.937255 )
+anchor_right = 1.0
+margin_top = 40.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 0, 40 )
+
+[connection signal="button_down" from="Toolbar/ButtonDrag" to="." method="start_drag"]
+[connection signal="button_up" from="Toolbar/ButtonDrag" to="." method="stop_drag"]
+[connection signal="pressed" from="Toolbar/ButtonClose" to="." method="close"]
+[connection signal="toggled" from="Toolbar/ButtonPin" to="." method="pin"]
